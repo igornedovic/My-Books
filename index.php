@@ -23,7 +23,7 @@
                                                 <i class="fas fa-user-circle fa-9x text-secondary"></i>
                                             </div>
                                             <form method="post" action="">
-                                                <div class="text-danger">
+                                                <div>
                                                     <span id="response"></span>
                                                 </div>
                                                 <div class="form-group">

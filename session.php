@@ -4,18 +4,13 @@
 
     session_start();
 
-    // if(isset($_SESSION['loggedIn'])){
-    //     exit('loggedIn');
-    // }
-
     if(isset($_POST['username']) && isset($_POST['password'])){
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $operations = new Db();
+        $db = new Db();
         $user = new User(null, $username, $password);
 
-        $operations->login($user);
+        $db->login($user);
     }
-
 ?>

@@ -25,6 +25,10 @@ class Db {
     function __construct()
     {
         $this->conn = new mysqli('localhost', 'root', '', 'mybooks');
+
+        if ($this->conn->connect_errno) {
+            exit("Connection failed: " . $this->conn->connect_error);
+        }
     }
 
     // Create
@@ -133,7 +137,7 @@ class Db {
 
     // Logout
     public function logout(){
-        session_start();
+        // session_start();
 
         unset($_SESSION['loggedIn']);
         session_destroy();

@@ -22,7 +22,7 @@
                 <?php if(isset($_SESSION['loggedIn'])):?>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="#">Book List</a>
+                            <a class="nav-link text-dark" href="bookList.php">Book List</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
@@ -32,7 +32,7 @@
                         </li>
                         <?php endif;?>
                         <li class="nav-item">
-                            <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                            <button id="btn-logout" type="button" class="nav-link btn btn-link text-dark">Logout</button>
                         </li>
                     </ul>   
                 <?php endif;?>                

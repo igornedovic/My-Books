@@ -16,12 +16,31 @@ $(document).ready(function () {
         },
         success: function (response) {
           $("#response").html(response);
-          if (response.indexOf("success") >= 0) {
+          if (response === "success") {
+            $("#response").addClass("text-success");
             window.location = "home.php";
+          } else {
+            $("#response").addClass("text-danger");
           }
         },
         dataType: "text",
       });
     }
+  });
+
+  $("#btn-logout").on("click", function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: "handler.php",
+      method: "POST",
+      data: {
+        key: "logout",
+      },
+      success: function (response) {
+        if (response === "success") {
+          window.location = "index.php";
+        }
+      },
+    });
   });
 });
