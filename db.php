@@ -6,22 +6,6 @@ class Db {
     public $conn;
     private $rowID;
 
-    //public function connect(){
-        //$this->conn = new mysqli('localhost', 'root', '', 'mybooks');
-        
-        // if(isset($_POST['name']))
-        //     $this->name = $this->conn->real_escape_string($_POST['name']);
-
-        // if(isset($_POST['description']))
-        //     $this->description = $this->conn->real_escape_string($_POST['description']);
-        
-        // if(isset($_POST['year']))
-        //     $this->year = $this->conn->real_escape_string($_POST['year']);
-        
-        // if(isset($_POST['rowID']))
-        //     $this->rowID = $this->conn->real_escape_string($_POST['rowID']);
-    //}
-
     function __construct()
     {
         $this->conn = new mysqli('localhost', 'root', '', 'mybooks');
