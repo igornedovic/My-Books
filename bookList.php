@@ -41,20 +41,27 @@
                     </div>
 
                     <div class="modal-body">
-                        <div id="edit-content">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name"><br>
-                            <input type="text" class="form-control" id="author" name="author" placeholder="Author"><br>
-                            <input type="number" class="form-control" id="year" name="year" placeholder="Year"><br>
-                            <input type="number" class="form-control" id="num-pages" name="num-pages" placeholder="Number of pages"><br>
-                            <select class="browser-default custom-select" id="select" name="select" >
-                                <option value="" disabled selected>Choose category</option>
-                                <option value="1">Classic</option>
-                                <option value="2">Science Fiction</option>
-                                <option value="3">Business</option>
-                                <option value="4">Philosophy</option>
-                            </select>
-                            <input type="hidden" id="edit-row-id" value="0">
-                        </div>
+                        <form method="post" action="">
+                            <div id="edit-content">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name"><br>
+                                <input type="text" class="form-control" id="author" name="author" placeholder="Author"><br>
+                                <input type="number" class="form-control" id="year" name="year" placeholder="Year"><br>
+                                <input type="number" class="form-control" id="num-pages" name="num-pages" placeholder="Number of pages"><br>
+                                <select class="browser-default custom-select" id="select" name="select" >
+                                    <option value="" disabled selected>Choose category</option>
+                                    <option value="1">Classic</option>
+                                    <option value="2">Science Fiction</option>
+                                    <option value="3">Business</option>
+                                    <option value="4">Philosophy</option>
+                                </select>
+                                <!-- <input type="hidden" id="edit-row-id" value="0"> -->
+                            </div>
+
+                            <div class="modal-footer">
+                                <input type="button" class="btn btn-secondary" id="btn-close" data-dismiss="modal" value="Close">
+                                <input type="button" class="btn btn-primary" id="btn-manage" onclick="manageData('addNew')" value="Save" >
+                            </div>
+                        </form>
 
                         <div id="show-content" style="display:none;">
                             <h3>Year</h3>
@@ -66,11 +73,6 @@
                             <h3>Category</h3>
                             <div id="category-id"></div>
                         </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-secondary" id="btn-close" data-dismiss="modal" value="Close">
-                        <input type="button" class="btn btn-primary" id="btn-manage" onclick="manageData('addNew')" value="Save" >
                     </div>
                 </div>
             </div>

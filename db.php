@@ -15,19 +15,6 @@ class Db {
         }
     }
 
-    // Create
-    // public function insert(){
-    //     $this->connect();
-    //     $sql = $this->conn->query("SELECT id FROM films WHERE name = '$this->name'AND year = '$this->year'");
-    //     if ($sql->num_rows > 0)
-    //         exit("Film with this name and year already exists!");
-    //     else {
-    //         $this->conn->query("INSERT INTO films (name, description, year) 
-    //                     VALUES ('$this->name', '$this->description', '$this->year')");
-    //         exit('success');
-    //     }
-    // }
-
     // // Read
     // public function readAll(){
     //     $this->connect();
@@ -84,7 +71,8 @@ class Db {
     // }
 
     // Login
-    public function login(User $user){
+    public function login(User $user)
+    {
         $username = $this->conn->real_escape_string($user->username);
         $password = $this->conn->real_escape_string($user->password);
 
@@ -92,12 +80,11 @@ class Db {
 
         if($data->num_rows == 0)
         {
-            $result = $this->conn -> query("INSERT INTO users (username, password) VALUES('$user->username', '$user->password')");
+            $query = $this->conn -> query("INSERT INTO users (username, password) VALUES('$username', '$password')");
 
-            if($result)
+            if($query)
             {
-                $_SESSION['loggedIn'] = '1';
-                $_SESSION['username'] = $username;
+                $this->setUser($username, $password);
                 exit('success');
             }
             else
@@ -106,9 +93,8 @@ class Db {
             }
         }
         else if($data->num_rows > 0)
-        {    
-            $_SESSION['loggedIn'] = '1';
-            $_SESSION['username'] = $username;
+        {   
+            $this->setUser($username, $password);
             exit('success');
         }
         else
@@ -119,13 +105,47 @@ class Db {
 
     }
 
-    // Logout
-    public function logout(){
-        // session_start();
+    private function setUser($username, $password)
+    {
+        $sql = $this->conn->query("SELECT id FROM users WHERE username='$username' AND password='$password'");
+        $result = $sql->fetch_row();
+        $_SESSION['user_id'] = $result[0];
+        $_SESSION['username'] = $username;
+    }
 
+    // Logout
+    public function logout()
+    {
         unset($_SESSION['loggedIn']);
         session_destroy();
         exit('success');
+    }
+
+    // Insert
+    public function insert(Book $book)
+    {
+        $name = $this->conn->real_escape_string($book->name);
+        $author = $this->conn->real_escape_string($book->author);
+        $year = $book->year;
+        $number_pages = $book->number_pages;
+        $user_id = $book->user_id;
+        $category_id = $book->category_id;
+
+        $data = $this->conn -> query("SELECT * FROM books WHERE name='$name' AND author='$author'");
+
+        if($data->num_rows > 0)
+        {
+            exit("Book with this name and author already exists!");
+        }
+        else
+        {
+            $query = $this->conn -> query("INSERT INTO books (name, author, year, number_pages, user_id, category_id) VALUES('$name', '$author', '$year', '$number_pages', '$user_id', '$category_id')");
+
+            if($query)
+            {
+                exit('success'); 
+            }
+        }
     }
 }
 ?>

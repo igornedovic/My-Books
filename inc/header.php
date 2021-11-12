@@ -22,7 +22,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" href="#">MyBooks</a>
-                <?php if(isset($_SESSION['loggedIn'])):?>
+                <?php if(isset($_SESSION['user_id'])):?>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="bookList.php">Book List</a>

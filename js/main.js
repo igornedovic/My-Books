@@ -22,14 +22,12 @@ function manageData(key) {
   var author = $("#author").val();
   var year = $("#year").val();
   var numberOfPages = $("#num-pages").val();
-
   var select = document.getElementById("select");
-  var selectedValue = select.options[select.selectedIndex].text;
+  var selectedValue = select.options[select.selectedIndex].value;
 
-  var editRowID = $("#edit-row-id").val();
+  // var editRowId = $("#edit-row-id").val();
 
-  // ovde CHECKPOINT
-  console.log(name, author, year, numberOfPages, selectedValue, editRowID);
+  console.log(name, author, year, numberOfPages, selectedValue);
 
   if (
     isNotEmpty($("#name")) &&
@@ -37,42 +35,42 @@ function manageData(key) {
     isNotEmpty($("#year")) &&
     isNotEmpty($("#num-pages"))
   ) {
-    console.log("TEST");
-    /*
     $.ajax({
-      url: "execute.php",
+      url: "handler.php",
       method: "POST",
       dataType: "text",
       data: {
         key: key,
-        name: name.val(),
-        description: description.val(),
-        year: year.val(),
-        rowID: editRowID.val(),
+        name: name,
+        author: author,
+        year: year,
+        numberOfPages: numberOfPages,
+        selectedValue: selectedValue,
       },
       success: function (response) {
         if (response != "success") alert(response);
         else {
           location.reload();
-          name.val("");
-          description.val("");
-          year.val("");
-          $("#tableManager").modal("hide");
-          $("#manageBtn")
+          $("#name").val("");
+          $("#author").val("");
+          $("#year").val("");
+          $("#num-pages").val("");
+          $("#table-manager").modal("hide");
+          $("#btn-manage")
             .attr("value", "Add")
             .attr("onclick", "manageData('addNew')");
         }
       },
-    });*/
+    });
   }
 }
 
-function isNotEmpty(caller) {
-  if (caller.val() === "") {
-    caller.css("border", "1px solid red");
+function isNotEmpty(element) {
+  if (element.val() === "") {
+    element.css("border", "1px solid red");
     return false;
   } else {
-    caller.css("border", "");
+    element.css("border", "");
   }
 
   return true;
