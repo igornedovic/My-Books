@@ -1,4 +1,20 @@
 $(document).ready(function () {
+  $("#book-list").on("click", function () {
+    $.ajax({
+      url: "handler.php",
+      method: "POST",
+      dataType: "text",
+      data: {
+        key: "getAllBooks",
+      },
+      success: function (response) {
+        if (response == "success") {
+          console.log("success");
+        }
+      },
+    });
+  });
+
   $("#btn-add-new").on("click", function () {
     $(".modal-title").html("Add film");
     $("#table-manager").modal("show");

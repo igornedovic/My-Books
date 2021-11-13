@@ -1,4 +1,7 @@
 <?php
+
+include "model/dataToReturn.php";
+
 class Db {
     private $name;
     private $description;
@@ -15,32 +18,7 @@ class Db {
         }
     }
 
-    // // Read
-    // public function readAll(){
-    //     $this->connect();
-    //     $start = $this->conn->real_escape_string($_POST['start']);
-    //     $limit = $this->conn->real_escape_string($_POST['limit']);
 
-    //     $sql = $this->conn->query("SELECT id, name FROM films LIMIT $start, $limit");
-    //     if ($sql->num_rows > 0) {
-    //         $response = "";
-    //         while($data = $sql->fetch_array()) {
-    //             $response .= '
-    //                 <tr>
-    //                     <td>'.$data["id"].'</td>
-    //                     <td id="film_'.$data["id"].'">'.$data["name"].'</td>
-    //                     <td>
-    //                         <input type="button" onclick="viewORedit('.$data["id"].', \'edit\')" value="Edit" class="btn btn-primary">
-    //                         <input type="button" onclick="viewORedit('.$data["id"].', \'view\')" value="View" class="btn">
-    //                         <input type="button" onclick="deleteRow('.$data["id"].')" value="Delete" class="btn btn-danger">
-    //                     </td>
-    //                 </tr>
-    //             ';
-    //         }
-    //         exit($response);
-    //     } else
-    //         exit('reachedMax');
-    // }
 
     // public function readById(){
     //     $this->connect();
@@ -145,6 +123,31 @@ class Db {
             {
                 exit('success'); 
             }
+        }
+    }
+
+    // Get All
+    public function getAllBooks(){
+        $user_id = intval($_SESSION['user_id']);
+
+        $data = $this->conn -> query("SELECT id, name, author FROM books WHERE user_id='$user_id'");
+
+        if($data->num_rows > 0)
+        {
+            $return_arr = array();
+
+            while ($row = $data->fetch_array()) {
+                $row_array['id'] = intval($row['id']);
+                $row_array['name'] = $row['name'];
+                $row_array['author'] = $row['author'];
+        
+                array_push($return_arr,$row_array);
+            }
+
+            $dataToReturn = new DataToReturn();
+            $dataToReturn->data = $return_arr;
+            $_SESSION['json_data'] = json_encode($dataToReturn);
+            exit("success");
         }
     }
 }

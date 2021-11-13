@@ -19,7 +19,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Author</th>
-                        <th></th>
+                        <th>Options</th>
                     </tr>
                 </thead>
             </table>

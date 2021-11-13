@@ -32,6 +32,9 @@ if (isset($_POST['key'])) {
                 echo 'Failed to add new book!';
             }
             break;
+        case 'getAllBooks':
+            $db->getAllBooks();
+            break;
     }
 }
 ?>
