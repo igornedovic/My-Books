@@ -5,6 +5,8 @@ $(document).ready(function () {
       type: "GET",
       dataType: "json",
     },
+    lengthMenu: [5],
+    lengthChange: false,
     columns: [
       { data: "name", width: "30%" },
       { data: "author", width: "30%" },

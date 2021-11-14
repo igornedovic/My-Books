@@ -1,20 +1,4 @@
 $(document).ready(function () {
-  $("#book-list").on("click", function () {
-    $.ajax({
-      url: "handler.php",
-      method: "POST",
-      dataType: "text",
-      data: {
-        key: "getAllBooks",
-      },
-      success: function (response) {
-        if (response == "success") {
-          console.log("success");
-        }
-      },
-    });
-  });
-
   $("#btn-add-new").on("click", function () {
     $(".modal-title").html("Add film");
     $("#table-manager").modal("show");
@@ -23,7 +7,6 @@ $(document).ready(function () {
   $("#table-manager").on("hidden.bs.modal", function () {
     $("#show-content").fadeOut();
     $("#edit-content").fadeIn();
-    $("#edit-row-id").val(0);
     $("#name").val("");
     $("#author").val("");
     $("#btn-manage")
@@ -31,6 +14,8 @@ $(document).ready(function () {
       .attr("onclick", "manageData('addNew')")
       .fadeIn();
   });
+
+  getAllBooks();
 });
 
 function manageData(key) {
@@ -40,10 +25,6 @@ function manageData(key) {
   var numberOfPages = $("#num-pages").val();
   var select = document.getElementById("select");
   var selectedValue = select.options[select.selectedIndex].value;
-
-  // var editRowId = $("#edit-row-id").val();
-
-  console.log(name, author, year, numberOfPages, selectedValue);
 
   if (
     isNotEmpty($("#name")) &&
@@ -66,6 +47,7 @@ function manageData(key) {
       success: function (response) {
         if (response != "success") alert(response);
         else {
+          getAllBooks();
           location.reload();
           $("#name").val("");
           $("#author").val("");
@@ -90,4 +72,20 @@ function isNotEmpty(element) {
   }
 
   return true;
+}
+
+function getAllBooks() {
+  $.ajax({
+    url: "handler.php",
+    method: "POST",
+    dataType: "text",
+    data: {
+      key: "getAllBooks",
+    },
+    success: function (response) {
+      if (response == "success") {
+        console.log("success");
+      }
+    },
+  });
 }

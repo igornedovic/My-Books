@@ -1,5 +1,10 @@
 <?php
     include "inc/header.php";
+
+    if(!isset($_SESSION['user_id'])){
+        header('Location: index.php');
+        exit();
+    }
 ?>
 
 <br />
@@ -54,7 +59,6 @@
                                     <option value="3">Business</option>
                                     <option value="4">Philosophy</option>
                                 </select>
-                                <!-- <input type="hidden" id="edit-row-id" value="0"> -->
                             </div>
 
                             <div class="modal-footer">
