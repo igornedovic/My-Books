@@ -18,7 +18,7 @@ $(document).ready(function () {
   getAllBooks();
 });
 
-function manageData(key) {
+function manageData(key, bookId = 0) {
   var name = $("#name").val();
   var author = $("#author").val();
   var year = $("#year").val();
@@ -38,6 +38,7 @@ function manageData(key) {
       dataType: "text",
       data: {
         key: key,
+        bookId: bookId,
         name: name,
         author: author,
         year: year,
@@ -119,7 +120,7 @@ function viewOrEdit(bookId, type) {
         $("#btn-close").fadeIn();
         $("#btn-manage")
           .attr("value", "Edit")
-          .attr("onclick", "manageData('update')");
+          .attr("onclick", `manageData('update', ${bookId})`);
       }
 
       $(".modal-title").html(response.name);

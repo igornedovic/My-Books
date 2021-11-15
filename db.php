@@ -3,9 +3,6 @@
 include "model/dataToReturn.php";
 
 class Db {
-    private $name;
-    private $description;
-    private $year;
     public $conn;
 
     function __construct()
@@ -16,13 +13,6 @@ class Db {
             exit("Connection failed: " . $this->conn->connect_error);
         }
     }
-
-    // // Update
-    // public function update(){
-    //     $this->connect();
-    //     $this->conn->query("UPDATE films SET name='$this->name', description='$this->description', year='$this->year' WHERE id='$this->rowID'");
-    //     exit('success');
-    // }
 
     // // Delete
     // public function delete(){
@@ -100,12 +90,33 @@ class Db {
         }
         else
         {
-            $query = $this->conn -> query("INSERT INTO books (name, author, year, number_pages, user_id, category_id) VALUES('$name', '$author', '$year', '$number_pages', '$user_id', '$category_id')");
+            $result = $this->conn -> query("INSERT INTO books (name, author, year, number_pages, user_id, category_id) VALUES('$name', '$author', '$year', '$number_pages', '$user_id', '$category_id')");
 
-            if($query)
+            if($result)
             {
                 exit('success'); 
             }
+        }
+    }
+
+    // Update
+    public function update(int $id, Book $book)
+    {
+        $name = $this->conn->real_escape_string($book->name);
+        $author = $this->conn->real_escape_string($book->author);
+        $year = $book->year;
+        $number_pages = $book->number_pages;
+        $user_id = $book->user_id;
+        $category_id = $book->category_id;
+
+        // $output = sprintf("<script>%s</script>", $id);
+        // exit($output);
+
+        $data = $this->conn -> query("UPDATE books SET name='$name', author='$author', year=$year, number_pages=$number_pages, user_id=$user_id, category_id=$category_id WHERE id=$id");
+
+        if($data)
+        {
+            exit('success');
         }
     }
 
