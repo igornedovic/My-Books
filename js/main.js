@@ -89,3 +89,41 @@ function getAllBooks() {
     },
   });
 }
+
+function viewOrEdit(bookId, type) {
+  $.ajax({
+    url: "handler.php",
+    method: "POST",
+    dataType: "json",
+    data: {
+      key: "getBookById",
+      bookId: bookId,
+    },
+    success: function (response) {
+      var select = document.getElementById("select");
+      if (type == "view") {
+        $("#edit-content").css("display", "none");
+        $("#show-content").fadeIn();
+        $("#year-view").html(response.year);
+        $("#num-pages-view").html(response.numberOfPages);
+        $("#category-view").html(select.options[response.category].text);
+        $("#btn-manage").css("display", "none");
+        $("#btn-close-view").fadeIn();
+      } else {
+        $("#edit-content").fadeIn();
+        $("#name").val(response.name);
+        $("#author").val(response.author);
+        $("#year").val(response.year);
+        $("#num-pages").val(response.numberOfPages);
+        select.selectedIndex = response.category;
+        $("#btn-close").fadeIn();
+        $("#btn-manage")
+          .attr("value", "Edit")
+          .attr("onclick", "manageData('update')");
+      }
+
+      $(".modal-title").html(response.name);
+      $("#table-manager").modal("show");
+    },
+  });
+}

@@ -36,7 +36,6 @@
 
 
 
-<!-- style="margin-top: 30px;" -->
 <div class="container">
         <div id="table-manager" class="modal fade">
             <div class="modal-dialog">
@@ -60,11 +59,6 @@
                                     <option value="4">Philosophy</option>
                                 </select>
                             </div>
-
-                            <div class="modal-footer">
-                                <input type="button" class="btn btn-secondary" id="btn-close" data-dismiss="modal" value="Close">
-                                <input type="button" class="btn btn-primary" id="btn-manage" onclick="manageData('addNew')" value="Save" >
-                            </div>
                         </form>
 
                         <div id="show-content" style="display:none;">
@@ -75,8 +69,13 @@
                             <div id="num-pages-view"></div>
                             <hr>
                             <h3>Category</h3>
-                            <div id="category-id"></div>
+                            <div id="category-view"></div>
                         </div>
+                    </div>
+
+                    <div class="modal-footer">
+                                <input type="button" class="btn btn-secondary" id="btn-close" data-dismiss="modal" value="Close">
+                                <input type="button" class="btn btn-primary" id="btn-manage" onclick="manageData('addNew')" value="Save" >
                     </div>
                 </div>
             </div>

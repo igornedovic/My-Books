@@ -35,6 +35,17 @@ if (isset($_POST['key'])) {
         case 'getAllBooks':
             $db->getAllBooks();
             break;
+        case 'getBookById':
+            if(isset($_POST['bookId']))
+            {
+                $id = $_POST['bookId'];
+                $db->getBookById($id);
+            }
+            else
+            {         
+                echo 'Failed to load book data!';
+            }
+            break;
     }
 }
 ?>

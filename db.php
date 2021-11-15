@@ -7,7 +7,6 @@ class Db {
     private $description;
     private $year;
     public $conn;
-    private $rowID;
 
     function __construct()
     {
@@ -17,22 +16,6 @@ class Db {
             exit("Connection failed: " . $this->conn->connect_error);
         }
     }
-
-
-
-    // public function readById(){
-    //     $this->connect();
-    //     $rowID = $this->conn->real_escape_string($_POST['rowID']);
-    //     $sql = $this->conn->query("SELECT name, description, year FROM films WHERE id='$this->rowID'");
-    //     $data = $sql->fetch_array();
-    //     $jsonArray = array(
-    //         'name' => $data['name'],
-    //         'year' => $data['year'],
-    //         'description' => $data['description'],
-    //     );
-
-    //     exit(json_encode($jsonArray));
-    // }
 
     // // Update
     // public function update(){
@@ -134,21 +117,39 @@ class Db {
 
         if($data->num_rows > 0)
         {
-            $return_arr = array();
+            $return_array = array();
 
             while ($row = $data->fetch_array()) {
                 $row_array['id'] = intval($row['id']);
                 $row_array['name'] = $row['name'];
                 $row_array['author'] = $row['author'];
         
-                array_push($return_arr,$row_array);
+                array_push($return_array,$row_array);
             }
 
-            $dataToReturn = new DataToReturn();
-            $dataToReturn->data = $return_arr;
-            $_SESSION['json_data'] = json_encode($dataToReturn);
+            $data_to_return = new DataToReturn();
+            $data_to_return->data = $return_array;
+            $_SESSION['json_data'] = json_encode($data_to_return);
             exit("success");
         }
     }
+
+    // Get By Id
+    public function getBookById(int $id)
+    {
+        $data = $this->conn -> query("SELECT * FROM books WHERE id=$id");
+        $result = $data->fetch_array();
+
+        $data_to_return = array(
+            'name' => $result['name'],
+            'author' => $result['author'],
+            'year' => $result['year'],
+            'numberOfPages' => $result['number_pages'],
+            'category' => $result['category_id']
+        );
+
+        exit(json_encode($data_to_return));
+    }
+
 }
 ?>
