@@ -84,9 +84,7 @@ function getAllBooks() {
       key: "getAllBooks",
     },
     success: function (response) {
-      if (response == "success") {
-        console.log("success");
-      }
+      if (response != "success") alert(response);
     },
   });
 }
@@ -126,5 +124,37 @@ function viewOrEdit(bookId, type) {
       $(".modal-title").html(response.name);
       $("#table-manager").modal("show");
     },
+  });
+}
+
+function deleteBook(bookId) {
+  swal({
+    title: "Are you sure you want to delete this book?",
+    text: "Once deleted, you will not be able to recover!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete) {
+      $.ajax({
+        url: "handler.php",
+        method: "POST",
+        dataType: "json",
+        data: {
+          key: "deleteBook",
+          bookId: bookId,
+        },
+        success: function (response) {
+          if (response.success) {
+            toastr.success(response.message);
+            setTimeout(() => {
+              location.reload();
+            }, 2000);
+          } else {
+            toastr.error(response.message);
+          }
+        },
+      });
+    }
   });
 }

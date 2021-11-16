@@ -14,13 +14,6 @@ class Db {
         }
     }
 
-    // // Delete
-    // public function delete(){
-    //     $this->connect();
-    //     $this->conn->query("DELETE FROM films WHERE id='$this->rowID'");
-    //     exit('The film has been deleted!');
-    // }
-
     // Login
     public function login(User $user)
     {
@@ -118,6 +111,31 @@ class Db {
         {
             exit('success');
         }
+    }
+
+    // Delete
+    public function delete(int $id)
+    {
+        $data = $this->conn -> query("DELETE FROM books WHERE id=$id");
+
+
+
+        if($data)
+        {
+            $data_to_return = array(
+                'success' => true,
+                'message' => 'Successfully deleted!'
+            );     
+        }
+        else
+        {
+            $data_to_return = array(
+                'success' => false,
+                'message' => 'Error while deleting!'
+            );
+        }
+
+        exit(json_encode($data_to_return));
     }
 
     // Get All

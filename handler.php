@@ -62,6 +62,14 @@ if (isset($_POST['key'])) {
                 $db->update($id, $book);
             }
             break;
+        case 'deleteBook':
+            if(isset($_POST['bookId']))
+            {
+                $id = $_POST['bookId'];
+
+                $db->delete($id);
+            }
+            break;
     }
 }
 ?>

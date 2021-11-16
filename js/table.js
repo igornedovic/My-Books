@@ -16,7 +16,7 @@ $(document).ready(function () {
           return `<div class="text-center">
                 <input type="button" onclick="viewOrEdit(${data}, 'view')" value="View" class="btn btn-primary">
                 <input type="button" onclick="viewOrEdit(${data}, 'edit')" value="Edit" class="btn btn-success">
-                <input type="button" onclick="delete(${data})" value="Delete" class="btn btn-danger">
+                <input type="button" onclick="deleteBook(${data})" value="Delete" class="btn btn-danger">
             </div>`;
         },
         width: "40%",
