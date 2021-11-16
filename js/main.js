@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  $("#book-list").on("click", function () {
+    getAllBooks();
+  });
+
   $("#btn-add-new").on("click", function () {
     $(".modal-title").html("Add film");
     $("#table-manager").modal("show");
@@ -14,8 +18,6 @@ $(document).ready(function () {
       .attr("onclick", "manageData('addNew')")
       .fadeIn();
   });
-
-  getAllBooks();
 });
 
 function manageData(key, bookId = 0) {
@@ -84,7 +86,9 @@ function getAllBooks() {
       key: "getAllBooks",
     },
     success: function (response) {
-      if (response != "success") alert(response);
+      if (response == "success") {
+        console.log("success");
+      }
     },
   });
 }

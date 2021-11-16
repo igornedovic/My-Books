@@ -142,7 +142,7 @@ class Db {
     public function getAllBooks(){
         $user_id = intval($_SESSION['user_id']);
 
-        $data = $this->conn -> query("SELECT id, name, author FROM books WHERE user_id='$user_id'");
+        $data = $this->conn -> query("SELECT id, name, author FROM books WHERE user_id=$user_id");
 
         if($data->num_rows > 0)
         {

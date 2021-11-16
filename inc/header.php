@@ -25,7 +25,10 @@
                 <?php if(isset($_SESSION['user_id'])):?>
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="bookList.php">Book List</a>
+                            <a class="nav-link text-dark" id="book-list" href="bookList.php">Book List</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="categories.php">Categories</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
