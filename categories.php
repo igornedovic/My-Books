@@ -19,13 +19,13 @@
             <h2 class="text-info">Categories</h2>
         </div>
         <div class="col-3 offset-3">
-            <a id="btn-add-new" class="btn btn-info form-control text-white"> 
+            <a id="btn-add-new" class="btn btn-info form-control text-white" onclick="sortDescending()"> 
                 Sort descending
             </a>
         </div>
 
         <div class="col-6 p-3 offset-3">
-            <table class="table table-striped table-bordered" style="width:100%; text-align: center">
+            <table id="category-table" class="table table-striped table-bordered" style="width:100%; text-align: center">
                 <thead>
                     <tr>
                         <th>Category</th>

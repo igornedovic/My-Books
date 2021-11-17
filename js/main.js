@@ -163,3 +163,28 @@ function deleteBook(bookId) {
     }
   });
 }
+
+function sortDescending() {
+  var table, rows, switching, i, front, back, shouldSwitch;
+  table = document.getElementById("category-table");
+  switching = true;
+
+  while (switching) {
+      switching = false;
+      rows = table.rows;
+      for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+          front = rows[i].getElementsByTagName("td")[1];
+          back = rows[i + 1].getElementsByTagName("td")[1];
+
+          if ((+front.innerHTML) - (+back.innerHTML) < 0) {
+              shouldSwitch = true;
+              break;
+          }
+      }
+      if (shouldSwitch) {
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+      }
+  }
+}

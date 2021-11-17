@@ -144,10 +144,10 @@ class Db {
 
         $data = $this->conn -> query("SELECT id, name, author FROM books WHERE user_id=$user_id");
 
+        $return_array = array();
+
         if($data->num_rows > 0)
         {
-            $return_array = array();
-
             while ($row = $data->fetch_array()) {
                 $row_array['id'] = intval($row['id']);
                 $row_array['name'] = $row['name'];
@@ -160,6 +160,10 @@ class Db {
             $data_to_return->data = $return_array;
             $_SESSION['json_data'] = json_encode($data_to_return);
             exit("success");
+        }
+        else
+        {
+            $_SESSION['json_data'] = json_encode($return_array);
         }
     }
 
