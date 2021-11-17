@@ -1,6 +1,6 @@
 <?php
 
-include "model/dataToReturn.php";
+require_once "model/dataToReturn.php";
 
 class Db {
     public $conn;
@@ -178,6 +178,14 @@ class Db {
         );
 
         exit(json_encode($data_to_return));
+    }
+
+    // Get Categories
+    public function getCategories()
+    {
+        $user_id = intval($_SESSION['user_id']);
+        $data = $this->conn -> query("SELECT c.name AS category, COUNT(*) AS number FROM books b JOIN categories c ON (b.category_id = c.id) WHERE b.user_id = $user_id GROUP BY b.category_id");
+        return $data;
     }
 
 }

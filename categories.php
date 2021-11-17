@@ -1,10 +1,15 @@
 <?php
+    require_once "db.php";
     include "inc/header.php";
 
     if(!isset($_SESSION['user_id'])){
         header('Location: index.php');
         exit();
     }
+
+    $db = new Db();
+    $result = $db->getCategories();
+
 ?>
 
 <br />
@@ -28,6 +33,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    if($result->num_rows > 0)
+                    {
+                        while($row = $result->fetch_array()):
+                    ?>
+                    <tr>
+                        <td><?php echo $row["category"]?></td>
+                        <td><?php echo $row["number"]?></td>
+                    </tr>
+                    <?php
+                        endwhile;
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

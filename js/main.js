@@ -54,8 +54,8 @@ function manageData(key, bookId = 0) {
           location.reload();
           $("#name").val("");
           $("#author").val("");
-          $("#year").val("");
-          $("#num-pages").val("");
+          $("#year").val(0);
+          $("#num-pages").val(0);
           $("#table-manager").modal("hide");
           $("#btn-manage")
             .attr("value", "Add")
@@ -152,6 +152,7 @@ function deleteBook(bookId) {
           if (response.success) {
             toastr.success(response.message);
             setTimeout(() => {
+              getAllBooks();
               location.reload();
             }, 2000);
           } else {

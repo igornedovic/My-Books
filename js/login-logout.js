@@ -8,9 +8,11 @@ $(document).ready(function () {
       alert("Please enter your email and password.");
     } else {
       $.ajax({
-        url: "session.php",
+        url: "handler.php",
         method: "POST",
+        dataType: "text",
         data: {
+          key: "login",
           username: username,
           password: password,
         },
@@ -23,7 +25,6 @@ $(document).ready(function () {
             $("#response").addClass("text-danger");
           }
         },
-        dataType: "text",
       });
     }
   });

@@ -1,6 +1,7 @@
 <?php
 
-include "db.php";
+require_once "db.php";
+include "model/user.php";
 include "model/book.php";
 
 session_start();
@@ -9,6 +10,17 @@ $db = new Db();
 
 if (isset($_POST['key'])) {
     switch($_POST['key']){
+        case 'login':
+            if(isset($_POST['username']) && isset($_POST['password'])){
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+        
+                $db = new Db();
+                $user = new User(null, $username, $password);
+        
+                $db->login($user);
+            }
+            break;
         case 'logout':
             $db->logout();
             break;    
